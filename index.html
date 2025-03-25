@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CesiumJS Map with Drawing Tools</title>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.95/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #header {
+            height: 50px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        #header button, #header .dropdown button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        #header button:hover, #header .dropdown button:hover {
+            background-color: #2980b9;
+        }
+        #footer {
+            height: 30px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 12px;
+        }
+        #cesiumContainer {
+            height: calc(100% - 80px);
+            width: 100%;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        #wktDiv {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            background-color: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+            max-width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        #wktLabel {
+            margin: 0;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        .clear-btn {
+            background-color: #e74c3c !important;
+            margin-left: 10px;
+        }
+        .clear-btn:hover {
+            background-color: #c0392b !important;
+        }
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <button id="homeButton">Home View</button>
+        <div class="dropdown">
+            <button id="functionsButton">Drawing Tools</button>
+            <div class="dropdown-content">
+                <a href="#" id="drawPointButton">Draw Points</a>
+                <a href="#" id="saveButton">Save Points to File</a>
+                <a href="#" id="loadButton">Load Points from File</a>
+                <a href="#" id="clearButton">Clear All Points</a>
+            </div>
+        </div>
+        <button id="aboutButton">About</button>
+    </div>
+
+    <div id="cesiumContainer"></div>
+    <div id="wktDiv" style="display: none;">
+        <p id="wktLabel"></p>
+    </div>
+
+    <input type="file" id="fileInput" accept=".csv,.txt">
+
+    <div id="footer">
+        <p>CesiumJS Map Application © 2025</p>
+    </div>
+
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.95/Build/Cesium/Cesium.js"></script>
+    <script src="functions.js"></script>
+</body>
+</html>
